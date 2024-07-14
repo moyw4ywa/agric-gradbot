@@ -2,12 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for
 from agric_bot import AgricultureBot
 from gemini_api import GeminiAPI
 import os
+from google.auth.credentials import AnonymousCredentials
+from google.generativeai.generative_models_v1beta import GenerativeServiceClient
 
 app = Flask(__name__)
 
 api_key = os.getenv('GOOGLE_API_KEY')
-credentials = Credentials(api_key)
-client = generative_models_v1beta.GenerativeServiceClient(credentials=credentials)
+credentials = AnonymousCredentials()  # Using AnonymousCredentials for API key authentication
+client = GenerativeServiceClient(api_key=api_key, credentials=credentials)
 
 # Initialize the Agriculture Bot and Agriculture API
 agriculture_bot = AgricultureBot()
