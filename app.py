@@ -15,7 +15,9 @@ except ModuleNotFoundError:
 app = Flask(__name__)
 
 # Load API key from environment variables
-api_key = os.getenv('GOOGLE_API_KEY')
+api_key_json = os.getenv("GOOGLE_API_KEY_JSON")
+
+api_key = json.loads(api_key_json)
 
 # Create credentials for AI Platform Prediction Service
 if api_key:
