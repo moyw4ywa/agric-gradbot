@@ -9,3 +9,4 @@ pandas
 langchain
 google-auth
 google-cloud
+google-cloud-ai-platform
