@@ -7,3 +7,5 @@ transformers
 huggingface-hub
 pandas
 langchain
+google-auth
+google-cloud
