@@ -4,16 +4,27 @@ from gemini_api import GeminiAPI
 import os
 from google.oauth2 import service_account
 from google.cloud import aiplatform_v1
-from google.auth.credentials import AnonymousCredentials
-from google.generativeai.generative_models_v1beta import GenerativeServiceClient
+
+# Ensure correct import for GenerativeServiceClient
+try:
+    from google.generativeai.generative_models_v1beta import GenerativeServiceClient
+except ModuleNotFoundError:
+    # Handle error if the module is not found
+    print("Module 'google.generativeai.generative_models_v1beta' not found")
 
 app = Flask(__name__)
 
+# Load API key from environment variables
 api_key = os.getenv('GOOGLE_API_KEY')
-credentials = service_account.Credentials.from_service_account_info(api_key)
-client = aiplatform_v1.PredictionServiceClient(credentials=credentials)
 
-# Initialize the Agriculture Bot and Agriculture API
+# Create credentials for AI Platform Prediction Service
+if api_key:
+    credentials = service_account.Credentials.from_service_account_info(api_key)
+    client = aiplatform_v1.PredictionServiceClient(credentials=credentials)
+else:
+    print("GOOGLE_API_KEY not found in environment variables")
+
+# Initialize the Agriculture Bot and Gemini API
 agriculture_bot = AgricultureBot()
 gemini_api = GeminiAPI()
 
