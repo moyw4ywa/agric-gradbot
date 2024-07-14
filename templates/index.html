@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with AgriGrow's AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='botpic.jpg') }}" alt="Agriculture Image">
+        </div>
+        <div class="chat-container">
+            <h1 class="title">Chat with AgriGrow's AI</h1>
+            
+            <!-- Form to submit user input -->
+            <form action="{{ url_for('chat') }}" method="POST">
+                <label for="user_input">Enter your question or concern:</label>
+                <input type="text" id="user_input" name="user_input">
+                <button type="submit">Generate Response</button>
+            </form>
+            
+            <!-- Display agricultural advice and response -->
+            {% if agriculture_advice %}
+            <div class="advice-container">
+                <h2><em>Agricultural Advice:</em></h2> <!-- Italicize h2 heading -->
+                <p>{{ agriculture_advice }}</p>
+            </div>
+            {% endif %}
+        
+            {% if agriculture_response %}
+            <div class="advice-container">
+                <h2><em>Agricultural Response:</em></h2> <!-- Italicize h2 heading -->
+                <p>{{ agriculture_response }}</p>
+            </div>
+            {% endif %}
+        
+            <!-- Links to main app and subscribe -->
+            <div>
+                <a href="{{ url_for('main_app') }}"><button>Go to Main App Website</button></a>
+                <a href="{{ url_for('subscribe') }}"><button>Join Our Mailing List</button></a>
+            </div>
+            
+            <!-- Information about the bot -->
+            <div>
+                <p>This bot provides agricultural advice. For specific agricultural queries, consult local experts or authorities.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
