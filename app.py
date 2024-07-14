@@ -35,5 +35,5 @@ def get_response(user_input):
     agriculture_response = gemini_api.generate_response(user_input)
     return agriculture_advice, agriculture_response
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
