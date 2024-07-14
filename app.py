@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for 
 from agric_bot import AgricultureBot
 from gemini_api import GeminiAPI
+import os
 
 app = Flask(__name__)
+
+api_key = os.getenv('GOOGLE_API_KEY')
+credentials = Credentials(api_key)
+client = generative_models_v1beta.GenerativeServiceClient(credentials=credentials)
 
 # Initialize the Agriculture Bot and Agriculture API
 agriculture_bot = AgricultureBot()
